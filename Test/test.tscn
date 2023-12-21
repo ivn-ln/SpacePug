@@ -1,0 +1,134 @@
+[gd_scene load_steps=19 format=3 uid="uid://cs4vgeghe06ft"]
+
+[ext_resource type="PackedScene" uid="uid://m8abi06xupwi" path="res://Player/player.tscn" id="1_2uf08"]
+[ext_resource type="Script" path="res://Test/test.gd" id="1_3xwmf"]
+[ext_resource type="Texture2D" uid="uid://drxev5e0g36l1" path="res://Sprites/circle_05.png" id="4_p08w4"]
+[ext_resource type="PackedScene" uid="uid://qskgi5c7xxoc" path="res://AsteroidSpawner/asteroid_spawner.tscn" id="5_3s1o1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wlq5q"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.290196, 0.298039, 0.309804, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_00igi"]
+sky_material = SubResource("ProceduralSkyMaterial_wlq5q")
+
+[sub_resource type="Environment" id="Environment_sx2dv"]
+background_mode = 1
+background_color = Color(0.0431373, 0.0431373, 0.0784314, 1)
+sky = SubResource("Sky_00igi")
+tonemap_mode = 2
+tonemap_white = 0.5
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.5
+fog_light_color = Color(0.206569, 0.000154512, 0.270831, 1)
+fog_light_energy = 0.5
+fog_density = 0.5
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.4
+volumetric_fog_albedo = Color(0.207843, 0, 0.270588, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6lh1"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("4_p08w4")
+billboard_keep_scale = true
+proximity_fade_enabled = true
+
+[sub_resource type="Curve" id="Curve_0i8xi"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.423358, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0264123, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1uq5v"]
+curve = SubResource("Curve_0i8xi")
+
+[sub_resource type="Curve" id="Curve_vd0bd"]
+_data = [Vector2(0, 0.076923), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.0125458, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_gabfe"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.36484, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_op63t"]
+_data = [Vector2(0, 0.0879121), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.0334554, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_qjgwt"]
+curve_x = SubResource("Curve_vd0bd")
+curve_y = SubResource("Curve_gabfe")
+curve_z = SubResource("Curve_op63t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3oa0r"]
+particle_flag_align_y = true
+direction = Vector3(0, 0, 1)
+spread = 90.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+scale_curve = SubResource("CurveXYZTexture_qjgwt")
+color = Color(0.776471, 0.690196, 1, 1)
+alpha_curve = SubResource("CurveTexture_1uq5v")
+
+[sub_resource type="QuadMesh" id="QuadMesh_d2rov"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjls1"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_4tprg"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_3xwmf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sx2dv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_2uf08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 1.44349e-08, -8.62228e-08, 0, 0.986274, 0.165116, 8.74228e-08, 0.165116, -0.986274, 0, 1.26199, -5)
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, -5.96046e-08, 7.45058e-09, 0, 1, -2.98023e-08, 1.78814e-07, -3.00654)
+material_override = SubResource("StandardMaterial3D_p6lh1")
+amount = 160
+lifetime = 2.0
+preprocess = 2.0
+explosiveness = 0.1
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_3oa0r")
+draw_pass_1 = SubResource("QuadMesh_d2rov")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+transform = Transform3D(-1, -1.64169e-09, -8.74074e-08, 1.44349e-08, -0.989201, -0.146566, -8.62228e-08, -0.146566, 0.989201, -0.866432, 0.0468604, -3.85262)
+light_energy = 5.0
+spot_range = 4096.0
+spot_angle = 180.0
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("5_3s1o1")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, -1.16955e-06, 5, 0, -26.7562, -2.18557e-07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_fjls1")
+gi_mode = 0
+mesh = SubResource("TorusMesh_4tprg")

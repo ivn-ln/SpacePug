@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cegmmpb2e88fu"
+path="res://.godot/imported/PUSHILIN_star.obj-1d10849f7dc88fb8ac94b4366f49be3e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/PUSHILIN_star.obj-1d10849f7dc88fb8ac94b4366f49be3e.mesh"]
+
+source_file="res://Models/PUSHILIN_star.obj"
+dest_files=["res://.godot/imported/PUSHILIN_star.obj-1d10849f7dc88fb8ac94b4366f49be3e.mesh", "res://.godot/imported/PUSHILIN_star.obj-1d10849f7dc88fb8ac94b4366f49be3e.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

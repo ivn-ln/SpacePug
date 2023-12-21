@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxs8w74l6ixu2"]
+
+[ext_resource type="Script" path="res://MainMenu/main_menu.gd" id="1_5ab6b"]
+[ext_resource type="PackedScene" uid="uid://bt4c7ib28kix6" path="res://Logo/node_3d.tscn" id="6_ystl7"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5ab6b")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(0.592157, 0.701961, 1, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = -396.0
+offset_right = 171.0
+offset_bottom = -288.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 100
+text = "Play"
+flat = true
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -201.0
+offset_top = -241.0
+offset_right = 201.0
+offset_bottom = -184.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Fullscreen"
+flat = true
+
+[node name="Button2" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -171.0
+offset_top = -143.0
+offset_right = 171.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 72
+text = "Exit"
+flat = true
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -228.0
+offset_top = -169.0
+offset_right = 228.0
+offset_bottom = -128.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Inverse controls"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -129.0
+offset_top = -56.0
+offset_right = 129.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 90.0
+
+[node name="Label" type="Label" parent="HSlider"]
+modulate = Color(0.854902, 0.854902, 0.854902, 1)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -78.5
+offset_top = -40.0
+offset_right = 78.5
+offset_bottom = -7.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Sound"
+
+[node name="Node3D" parent="." instance=ExtResource("6_ystl7")]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="CheckButton" to="." method="_on_check_button_pressed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
